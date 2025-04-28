@@ -71,14 +71,15 @@ public class FinancialTracker {
             BufferedReader br = new BufferedReader(new FileReader("transactions.csv"));
             while((line = br.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                LocalDate date = LocalDate.parse(parts[0]);
-                LocalTime time = LocalTime.parse(parts[1]);
+                LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER);
+                LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER);
                 String description = parts[2];
                 String vendor = parts[3];
                 double amount = Double.parseDouble(parts[4]);
 
                 Transaction transaction = new Transaction(date, time, description, vendor, amount);
                 transactions.add(transaction);
+
             }
 
             br.close();
@@ -98,11 +99,11 @@ public class FinancialTracker {
 
         System.out.println("(1 / 5) Please Enter the Date in The following Format: (yyyy-MM-dd)");
         String userDateInput = scanner.nextLine();
-        LocalDate parsedDate = LocalDate.parse(userDateInput);
+        LocalDate parsedDate = LocalDate.parse(userDateInput, DATE_FORMATTER);
 
         System.out.println("(2 / 5) Please Enter the Time in The following Format: (HH:mm:ss)");
         String userTimeInput = scanner.nextLine();
-        LocalTime parsedTime = LocalTime.parse(userTimeInput);
+        LocalTime parsedTime = LocalTime.parse(userTimeInput, TIME_FORMATTER);
 
         System.out.println("(3 / 5) Please Enter the Description of the Deposit: ");
         String userDescriptionInput = scanner.nextLine();
@@ -112,13 +113,14 @@ public class FinancialTracker {
 
         System.out.println("(5 / 5) Finally, Enter the Amount of The Deposit: ");
         double userDepositInput = scanner.nextDouble();
+        scanner.nextLine();
 
-        Transaction deposit = new Transaction(parsedDate, parsedTime, userVendorInput, userDescriptionInput, userDepositInput);
+        Transaction deposit = new Transaction(parsedDate, parsedTime, userDescriptionInput, userVendorInput, userDepositInput);
         transactions.add(deposit);
 
         System.out.println("Deposit Successfully Added!");
         System.out.println(" ");
-        System.out.println(userDateInput + " | " + userTimeInput + " | " + userDescriptionInput + " | " + userVendorInput + " | " + userDepositInput );
+        System.out.println(parsedDate.format(DATE_FORMATTER) + " | " + parsedTime.format(TIME_FORMATTER) + " | " + userDescriptionInput + " | " + userVendorInput + " | " + userDepositInput );
         System.out.println(" ");
     }
 
@@ -202,7 +204,7 @@ public class FinancialTracker {
         // This method should display a table of all transactions in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
         for (Transaction transaction : transactions) {
-            System.out.println(transaction);
+            System.out.println(transactions);
             System.out.println(" ");
         }
     }
