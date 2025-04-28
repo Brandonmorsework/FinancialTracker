@@ -15,17 +15,17 @@ public class FinancialTracker {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
     public static void main(String[] args) {
-        loadTransactions(FILE_NAME);
+        loadTransactions("transactions.csv");
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
         while (running) {
             System.out.println("Welcome to TransactionApp");
             System.out.println("Choose an option:");
-            System.out.println("D) Add Deposit");
-            System.out.println("P) Make Payment (Debit)");
-            System.out.println("L) Ledger");
-            System.out.println("X) Exit");
+            System.out.println("Press 'D' to Add Deposit");
+            System.out.println("Press 'P' to Make Payment (Debit)");
+            System.out.println("Press 'L' to go to Ledger");
+            System.out.println("Press 'X' to Exit");
 
             String input = scanner.nextLine().trim();
 
@@ -132,13 +132,15 @@ public class FinancialTracker {
         boolean running = true;
         while (running) {
             System.out.println("Reports");
+            System.out.println(" ");
             System.out.println("Choose an option:");
-            System.out.println("1) Month To Date");
-            System.out.println("2) Previous Month");
-            System.out.println("3) Year To Date");
-            System.out.println("4) Previous Year");
-            System.out.println("5) Search by Vendor");
-            System.out.println("0) Back");
+            System.out.println(" ");
+            System.out.println("Press '1' for Month To Date");
+            System.out.println("Press '2' for Previous Month");
+            System.out.println("Press '3' for Year To Date");
+            System.out.println("Press '4' for Previous Year");
+            System.out.println("Press '5' for Search for by Vendor");
+            System.out.println("Press '0' to go Back");
 
             String input = scanner.nextLine().trim();
 
