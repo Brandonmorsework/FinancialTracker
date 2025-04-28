@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,8 +22,10 @@ public class FinancialTracker {
         boolean running = true;
 
         while (running) {
-            System.out.println("Welcome to TransactionApp");
-            System.out.println("Choose an option:");
+            System.out.println("Welcome to the Transaction Application!");
+            System.out.println(" ");
+            System.out.println("Please Choose an option:");
+            System.out.println(" ");
             System.out.println("Press 'D' to Add Deposit");
             System.out.println("Press 'P' to Make Payment (Debit)");
             System.out.println("Press 'L' to go to Ledger");
@@ -51,7 +55,7 @@ public class FinancialTracker {
         scanner.close();
     }
 
-    public static void loadTransactions(String fileName) {
+    public static ArrayList<Transaction> loadTransactions(String fileName) {
         // This method should load transactions from a file with the given file name.
         // If the file does not exist, it should be created.
         // The transactions should be stored in the `transactions` ArrayList.
@@ -60,6 +64,23 @@ public class FinancialTracker {
         // For example: 2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
         // After reading all the transactions, the file should be closed.
         // If any errors occur, an appropriate error message should be displayed.
+
+        String line;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("transactions.csv"));
+            while((line = br.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                String date = parts[0];
+                String time = parts[1];
+                String description = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return transactions;
     }
 
     private static void addDeposit(Scanner scanner) {
@@ -83,11 +104,11 @@ public class FinancialTracker {
         while (running) {
             System.out.println("Ledger");
             System.out.println("Choose an option:");
-            System.out.println("A) A`ll");
-            System.out.println("D) Deposits");
-            System.out.println("P) Payments");
-            System.out.println("R) Reports");
-            System.out.println("H) Home");
+            System.out.println("Press A to show All");
+            System.out.println("Press D to show Deposits");
+            System.out.println("Press P to show Payments");
+            System.out.println("Press R to show Reports");
+            System.out.println("Press H to show Home");
 
             String input = scanner.nextLine().trim();
 
