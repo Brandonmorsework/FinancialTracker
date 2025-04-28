@@ -104,10 +104,13 @@ public class FinancialTracker {
         System.out.println("(5 / 5) Finally, Enter the Amount of The Deposit: ");
         double userDepositInput = scanner.nextDouble();
 
+        Transaction deposit = new Transaction(userDateInput, userTimeInput, userVendorInput, userDescriptionInput, userDepositInput);
+        transactions.add(deposit);
+
         System.out.println("Deposit Successfully Added!");
         System.out.println(" ");
-        System.out.println(userDateInput + "|" + userTimeInput + "|" + userDescriptionInput + "|" + userVendorInput + "|" + userDepositInput);
-
+        System.out.println(userDateInput + " | " + userTimeInput + " | " + userDescriptionInput + " | " + userVendorInput + " | " + userDepositInput);
+        System.out.println(" ");
     }
 
     private static void addPayment(Scanner scanner) {
@@ -116,6 +119,36 @@ public class FinancialTracker {
         // The amount received should be a positive number then transformed to a negative number.
         // After validating the input, a new `Transaction` object should be created with the entered values.
         // The new payment should be added to the `transactions` ArrayList.
+
+        System.out.println("(1 / 5) Please Enter the Date in The following Format: (yyyy-MM-dd)");
+        String userDateInput = scanner.nextLine();
+
+        System.out.println("(2 / 5) Please Enter the Time in The following Format: (HH:mm:ss)");
+        String userTimeInput = scanner.nextLine();
+
+        System.out.println("(3 / 5) Please Enter the Description of the Deposit: ");
+        String userDescriptionInput = scanner.nextLine();
+
+        System.out.println("(4 / 5) Please Enter the Name of The Vendor: ");
+        String userVendorInput = scanner.nextLine();
+
+        System.out.println("(5 / 5) Finally, Enter the Amount of The Payment: ");
+        double userPaymentInput = scanner.nextDouble();
+        scanner.nextLine();
+        if (userPaymentInput < 0) {
+            System.out.println("Please Input a Positive Number For The Payment Amount");
+            return;
+        }
+        userPaymentInput = userPaymentInput * -1;
+
+        Transaction payment = new Transaction(userDateInput, userTimeInput, userDescriptionInput, userVendorInput, userPaymentInput);
+        transactions.add(payment);
+
+        System.out.println("Payment Successfully Added!");
+        System.out.println(" ");
+        System.out.println(userDateInput + " | " + userTimeInput + " | " + userDescriptionInput + " | " + userVendorInput + " | " + userPaymentInput);
+        System.out.println(" ");
+
     }
 
     private static void ledgerMenu(Scanner scanner) {
