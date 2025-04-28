@@ -9,12 +9,10 @@ import java.util.Scanner;
 
 public class FinancialTracker {
 
-    private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    private static ArrayList<Transaction> transactions = new ArrayList<>();
     private static final String FILE_NAME = "transactions.csv";
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final String TIME_FORMAT = "HH:mm:ss";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     public static void main(String[] args) {
         loadTransactions("transactions.csv");
@@ -38,12 +36,13 @@ public class FinancialTracker {
                     addDeposit(scanner);
                     break;
                 case "P":
-                    addPayment(scanner);
+                    makePayment(scanner);
                     break;
                 case "L":
                     ledgerMenu(scanner);
                     break;
-                case "X":
+                case ("X"):
+                    System.out.println("Thank You For Using The Transaction Application, Goodbye!");
                     running = false;
                     break;
                 default:
@@ -91,7 +90,7 @@ public class FinancialTracker {
         // The new deposit should be added to the `transactions` ArrayList.
     }
 
-    private static void addPayment(Scanner scanner) {
+    private static void makePayment(Scanner scanner) {
         // This method should prompt the user to enter the date, time, description, vendor, and amount of a payment.
         // The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
         // The amount received should be a positive number then transformed to a negative number.
@@ -147,6 +146,7 @@ public class FinancialTracker {
     private static void displayPayments() {
         // This method should display a table of all payments in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
+
     }
 
     private static void reportsMenu(Scanner scanner) {
