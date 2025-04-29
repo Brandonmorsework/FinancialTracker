@@ -386,14 +386,20 @@ public class FinancialTracker {
                     break;
 
                 case "5":
-                    // Prompt the user to enter a vendor name, then generate a report for all transactions
-                    // with that vendor, including the date, time, description, vendor, and amount for each transaction.
+                    System.out.println(" ");
+                    System.out.println("Type in the Name of The Vendor: ");
+                    String vendorName = scanner.nextLine().trim();
+                    filterTransactionsByVendor(vendorName);
+                    break;
+
+
                 case "0":
                     System.out.println(" ");
                     System.out.println("Returning Home...");
                     System.out.println(" ");
                     running = false;
                     break;
+
                 default:
                     System.out.println("Invalid option");
                     break;
@@ -442,13 +448,22 @@ public class FinancialTracker {
         // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
 
         boolean foundName = false;
-        System.out.println("Transactions for Vendor: " + vendorName + ")");
+        System.out.println("(Transactions from Vendor: " + vendorName + ")");
+        System.out.println(" ");
 
         for (Transaction transaction : transactions) {
             if (transaction.getVendor().equalsIgnoreCase(vendorName)) {
-                System.out.println();
+                System.out.printf("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+
+                foundName = true;
+
             }
         }
-
+        if (!foundName) {
+            System.out.println("No Transactions Found For This Vendor...");
+            System.out.println(" ");
+            System.out.println("Returning Back to Reports Page...");
+            return;
+        }
     }
 }
