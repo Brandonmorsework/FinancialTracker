@@ -1,7 +1,10 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +14,9 @@ import java.util.Scanner;
 public class FinancialTracker {
 
     private static ArrayList<Transaction> transactions = new ArrayList<>();
+    private static ArrayList<Transaction> deposits = new ArrayList<>();
+    private static ArrayList<Transaction> payments = new ArrayList<>();
+
     private static final String FILE_NAME = "transactions.csv";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -83,6 +89,11 @@ public class FinancialTracker {
                 Transaction transaction = new Transaction(date, time, description, vendor, amount);
                 transactions.add(transaction);
 
+                if (amount > 0) {
+                    deposits.add(transaction);
+                } else {
+                    payments.add(transaction);
+                }
             }
 
             br.close();
@@ -149,6 +160,16 @@ public class FinancialTracker {
 
         Transaction deposit = new Transaction(parsedDate, parsedTime, userDescriptionInput, userVendorInput, userDepositInput);
         transactions.add(deposit);
+        deposits.add(deposit);
+
+       try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
+            String line = String.format("%s | %s | %s | %s | $%.2f\n", deposit.getDate().format(DATE_FORMATTER), deposit.getTime().format(TIME_FORMATTER), deposit.getDescription(), deposit.getVendor(), deposit.getAmount());
+            writer.write(line);
+            writer.newLine();
+        } catch (Exception e) {
+           System.out.println(" ");
+           System.out.println("Error Writing This Deposit to File...");
+       }
 
         System.out.println(" ");
         System.out.println("Deposit Successfully Added!");
@@ -222,6 +243,16 @@ public class FinancialTracker {
 
         Transaction payment = new Transaction(parsedDate, parsedTime, userDescriptionInput, userVendorInput, userPaymentInput);
         transactions.add(payment);
+        payments.add(payment);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
+            String line = String.format("%s | %s | %s | %s | $%.2f\n", payment.getDate().format(DATE_FORMATTER), payment.getTime().format(TIME_FORMATTER), payment.getDescription(), payment.getVendor(), payment.getAmount());
+            writer.write(line);
+            writer.newLine();
+        } catch (Exception e) {
+            System.out.println(" ");
+            System.out.println("Error Writing This Payment to File...");
+        }
 
         System.out.println(" ");
         System.out.println("Payment Successfully Added!");
@@ -286,17 +317,32 @@ public class FinancialTracker {
     private static void displayDeposits() {
         // This method should display a table of all deposits in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
+            System.out.println(" ");
+            System.out.println("Here Are Your Deposits:");
+        for (Transaction transaction : deposits) {
+            System.out.println(" ");
+            System.out.printf("%s | %s | %s | %s | $%.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+
+        }
+
     }
 
     private static void displayPayments() {
         // This method should display a table of all payments in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
+        System.out.println(" ");
+        System.out.println("Here Are Your Payments:");
+        for (Transaction transaction : payments) {
+            System.out.println(" ");
+            System.out.printf("%s | %s | %s | %s | $%.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
 
+        }
     }
 
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
+            System.out.println(" ");
             System.out.println("Reports");
             System.out.println(" ");
             System.out.println("Choose an option:");
