@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -60,7 +59,6 @@ public class FinancialTracker {
                     break;
             }
         }
-
         scanner.close();
     }
 
@@ -99,7 +97,7 @@ public class FinancialTracker {
             br.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error");
         }
         return transactions;
     }
@@ -163,7 +161,7 @@ public class FinancialTracker {
         deposits.add(deposit);
 
        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
-            String line = String.format("%s | %s | %s | %s | $%.2f\n", deposit.getDate().format(DATE_FORMATTER), deposit.getTime().format(TIME_FORMATTER), deposit.getDescription(), deposit.getVendor(), deposit.getAmount());
+            String line = String.format("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", deposit.getDate().format(DATE_FORMATTER), deposit.getTime().format(TIME_FORMATTER), deposit.getDescription(), deposit.getVendor(), deposit.getAmount());
             writer.write(line);
             writer.newLine();
         } catch (Exception e) {
@@ -174,7 +172,7 @@ public class FinancialTracker {
         System.out.println(" ");
         System.out.println("Deposit Successfully Added!");
         System.out.println(" ");
-        System.out.printf("%s | %s | %s | %s | $%.2f\n", deposit.getDate().format(DATE_FORMATTER), deposit.getTime().format(TIME_FORMATTER), deposit.getDescription(), deposit.getVendor(), deposit.getAmount());
+        System.out.printf("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", deposit.getDate().format(DATE_FORMATTER), deposit.getTime().format(TIME_FORMATTER), deposit.getDescription(), deposit.getVendor(), deposit.getAmount());
         System.out.println(" ");
     }
 
@@ -246,7 +244,7 @@ public class FinancialTracker {
         payments.add(payment);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
-            String line = String.format("%s | %s | %s | %s | $%.2f\n", payment.getDate().format(DATE_FORMATTER), payment.getTime().format(TIME_FORMATTER), payment.getDescription(), payment.getVendor(), payment.getAmount());
+            String line = String.format("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", payment.getDate().format(DATE_FORMATTER), payment.getTime().format(TIME_FORMATTER), payment.getDescription(), payment.getVendor(), payment.getAmount());
             writer.write(line);
             writer.newLine();
         } catch (Exception e) {
@@ -257,7 +255,7 @@ public class FinancialTracker {
         System.out.println(" ");
         System.out.println("Payment Successfully Added!");
         System.out.println(" ");
-        System.out.printf("%s | %s | %s | %s | $%.2f\n", payment.getDate().format(DATE_FORMATTER), payment.getTime().format(TIME_FORMATTER), payment.getDescription(), payment.getVendor(), payment.getAmount());
+        System.out.printf("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", payment.getDate().format(DATE_FORMATTER), payment.getTime().format(TIME_FORMATTER), payment.getDescription(), payment.getVendor(), payment.getAmount());
         System.out.println(" ");
 
     }
@@ -307,10 +305,12 @@ public class FinancialTracker {
     private static void displayLedger() {
         // This method should display a table of all transactions in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
+        System.out.println(" ");
+        System.out.println("Here is Your Current 'All' Ledger");
         for (Transaction transaction : transactions) {
             System.out.println(" ");
-            System.out.printf("%s | %s | %s | %s | $%.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
-            System.out.println(" ");
+
+            System.out.printf("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
         }
     }
 
@@ -321,7 +321,7 @@ public class FinancialTracker {
             System.out.println("Here Are Your Deposits:");
         for (Transaction transaction : deposits) {
             System.out.println(" ");
-            System.out.printf("%s | %s | %s | %s | $%.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            System.out.printf("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
 
         }
 
@@ -334,7 +334,7 @@ public class FinancialTracker {
         System.out.println("Here Are Your Payments:");
         for (Transaction transaction : payments) {
             System.out.println(" ");
-            System.out.printf("%s | %s | %s | %s | $%.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            System.out.printf("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
 
         }
     }
