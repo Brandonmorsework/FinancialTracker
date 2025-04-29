@@ -21,6 +21,7 @@ public class FinancialTracker {
         boolean running = true;
 
         while (running) {
+            System.out.println(" ");
             System.out.println("Welcome to the Transaction Application!");
             System.out.println(" ");
             System.out.println("Please Choose an option:");
@@ -47,7 +48,9 @@ public class FinancialTracker {
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid option");
+                    System.out.println(" ");
+                    System.out.println("Invalid option, Returning to Home...");
+                    System.out.println(" ");
                     break;
             }
         }
@@ -69,7 +72,7 @@ public class FinancialTracker {
 
         try {
             BufferedReader br = new BufferedReader(new FileReader("transactions.csv"));
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\\|");
                 LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER);
                 LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER);
@@ -97,30 +100,60 @@ public class FinancialTracker {
         // After validating the input, a new `Transaction` object should be created with the entered values.
         // The new deposit should be added to the `transactions` ArrayList.
 
-        System.out.println("(1 / 5) Please Enter the Date in The following Format: (yyyy-MM-dd)");
-        String userDateInput = scanner.nextLine();
-        LocalDate parsedDate = LocalDate.parse(userDateInput, DATE_FORMATTER);
+        LocalDate parsedDate = null;
+        LocalTime parsedTime = null;
+        double userDepositInput = 0.0;
 
-        System.out.println("(2 / 5) Please Enter the Time in The following Format: (HH:mm:ss)");
-        String userTimeInput = scanner.nextLine();
-        LocalTime parsedTime = LocalTime.parse(userTimeInput, TIME_FORMATTER);
+        while (parsedDate == null) {
+            try {
+                System.out.println(" ");
+                System.out.println("(1 / 5) Please Enter the Date in The following Format: (yyyy-MM-dd)");
+                System.out.println(" ");
+                String userDateInput = scanner.nextLine();
+                parsedDate = LocalDate.parse(userDateInput, DATE_FORMATTER);
+            } catch (Exception e) {
+                System.out.println(" ");
+                System.out.println("Invalid Date Format, Please Try Again.");
+                System.out.println(" ");
+            }
+        }
 
+        while (parsedTime == null) {
+            try {
+                System.out.println(" ");
+                System.out.println("(2 / 5) Please Enter the Time in The following Format: (HH:mm:ss)");
+                System.out.println(" ");
+                String userTimeInput = scanner.nextLine();
+                parsedTime = LocalTime.parse(userTimeInput, TIME_FORMATTER);
+            } catch (Exception e) {
+                System.out.println(" ");
+                System.out.println("Invalid Time Format, Please Try Again.");
+                System.out.println(" ");
+            }
+        }
+        System.out.println(" ");
         System.out.println("(3 / 5) Please Enter the Description of the Deposit: ");
+        System.out.println(" ");
         String userDescriptionInput = scanner.nextLine();
 
+        System.out.println(" ");
         System.out.println("(4 / 5) Please Enter the Name of The Vendor: ");
+        System.out.println(" ");
         String userVendorInput = scanner.nextLine();
 
+        System.out.println(" ");
         System.out.println("(5 / 5) Finally, Enter the Amount of The Deposit: ");
-        double userDepositInput = scanner.nextDouble();
+        System.out.println(" ");
+        userDepositInput = scanner.nextDouble();
         scanner.nextLine();
 
         Transaction deposit = new Transaction(parsedDate, parsedTime, userDescriptionInput, userVendorInput, userDepositInput);
         transactions.add(deposit);
 
+        System.out.println(" ");
         System.out.println("Deposit Successfully Added!");
         System.out.println(" ");
-        System.out.println(parsedDate.format(DATE_FORMATTER) + " | " + parsedTime.format(TIME_FORMATTER) + " | " + userDescriptionInput + " | " + userVendorInput + " | " + userDepositInput );
+        System.out.printf("%s | %s | %s | %s | $%.2f\n", deposit.getDate().format(DATE_FORMATTER), deposit.getTime().format(TIME_FORMATTER), deposit.getDescription(), deposit.getVendor(), deposit.getAmount());
         System.out.println(" ");
     }
 
@@ -131,35 +164,69 @@ public class FinancialTracker {
         // After validating the input, a new `Transaction` object should be created with the entered values.
         // The new payment should be added to the `transactions` ArrayList.
 
-        System.out.println("(1 / 5) Please Enter the Date in The following Format: (yyyy-MM-dd)");
-        String userDateInput = scanner.nextLine();
-        LocalDate parsedDate = LocalDate.parse(userDateInput);
+        LocalDate parsedDate = null;
+        LocalTime parsedTime = null;
+        double userDepositInput = 0.0;
 
-        System.out.println("(2 / 5) Please Enter the Time in The following Format: (HH:mm:ss)");
-        String userTimeInput = scanner.nextLine();
-        LocalTime parsedTime = LocalTime.parse(userTimeInput);
+        while (parsedDate == null) {
+            try {
+                System.out.println(" ");
+                System.out.println("(1 / 5) Please Enter the Date in The following Format: (yyyy-MM-dd)");
+                System.out.println(" ");
+                String userDateInput = scanner.nextLine();
+                parsedDate = LocalDate.parse(userDateInput, DATE_FORMATTER);
+            } catch (Exception e) {
+                System.out.println(" ");
+                System.out.println("Invalid Date Format, Please Try Again.");
+                System.out.println(" ");
+            }
+        }
 
+        while (parsedTime == null) {
+            try {
+                System.out.println(" ");
+                System.out.println("(2 / 5) Please Enter the Time in The following Format: (HH:mm:ss)");
+                System.out.println(" ");
+                String userTimeInput = scanner.nextLine();
+                parsedTime = LocalTime.parse(userTimeInput, TIME_FORMATTER);
+            } catch (Exception e) {
+                System.out.println(" ");
+                System.out.println("Invalid Time Format, Please Try Again.");
+                System.out.println(" ");
+            }
+        }
+
+        System.out.println(" ");
         System.out.println("(3 / 5) Please Enter the Description of the Deposit: ");
+        System.out.println(" ");
         String userDescriptionInput = scanner.nextLine();
 
+        System.out.println(" ");
         System.out.println("(4 / 5) Please Enter the Name of The Vendor: ");
+        System.out.println(" ");
         String userVendorInput = scanner.nextLine();
 
+        System.out.println(" ");
         System.out.println("(5 / 5) Finally, Enter the Amount of The Payment: ");
+        System.out.println(" ");
         double userPaymentInput = scanner.nextDouble();
         scanner.nextLine();
         if (userPaymentInput < 0) {
+            System.out.println(" ");
             System.out.println("Please Input a Positive Number For The Payment Amount");
+            System.out.println(" ");
             return;
         }
+
         userPaymentInput = userPaymentInput * -1;
 
         Transaction payment = new Transaction(parsedDate, parsedTime, userDescriptionInput, userVendorInput, userPaymentInput);
         transactions.add(payment);
 
+        System.out.println(" ");
         System.out.println("Payment Successfully Added!");
         System.out.println(" ");
-        System.out.println(userDateInput + " | " + userTimeInput + " | " + userDescriptionInput + " | " + userVendorInput + " | " + userPaymentInput);
+        System.out.printf("%s | %s | %s | %s | $%.2f\n", payment.getDate().format(DATE_FORMATTER), payment.getTime().format(TIME_FORMATTER), payment.getDescription(), payment.getVendor(), payment.getAmount());
         System.out.println(" ");
 
     }
@@ -167,8 +234,11 @@ public class FinancialTracker {
     private static void ledgerMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
+            System.out.println(" ");
             System.out.println("Ledger");
+            System.out.println(" ");
             System.out.println("Choose an option:");
+            System.out.println(" ");
             System.out.println("Press A to show All");
             System.out.println("Press D to show Deposits");
             System.out.println("Press P to show Payments");
@@ -193,8 +263,11 @@ public class FinancialTracker {
                     break;
                 case "H":
                     running = false;
+                    break;
                 default:
+                    System.out.println(" ");
                     System.out.println("Invalid option");
+                    System.out.println(" ");
                     break;
             }
         }
@@ -204,7 +277,8 @@ public class FinancialTracker {
         // This method should display a table of all transactions in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
         for (Transaction transaction : transactions) {
-            System.out.println(transactions);
+            System.out.println(" ");
+            System.out.printf("%s | %s | %s | %s | $%.2f\n", transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
             System.out.println(" ");
         }
     }
