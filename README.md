@@ -4,8 +4,6 @@
 
 ## User Stories
 
-List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
-
 - As a customer, I want to be able to view my deposits and payments so that I can understand what transactions are being made in my name.
 
 - As a customer, I want to be able to run a custom search to find transactions based on the vendor name so that I can quickly find a transaction
@@ -38,7 +36,7 @@ List the user stories that guided the development of your application. Format th
 
 ### Running the Application in IntelliJ
 
-Follow these steps to get your application running within IntelliJ IDEA:
+Follow these steps to get your Financial Tracker Application running within IntelliJ IDEA:
 
 1. Open IntelliJ IDEA.
 2. Select "Open" and navigate to the directory where you cloned or downloaded the project.
