@@ -393,7 +393,6 @@ public class FinancialTracker {
                     System.out.println("Type in the Description, Vendor or Amount");
                     customSearch(customEntry);*/
 
-
                 case "0":
                     System.out.println(" ");
                     System.out.println("Returning Home...");
@@ -478,5 +477,4 @@ public class FinancialTracker {
             return;
         }
     }
-
 }

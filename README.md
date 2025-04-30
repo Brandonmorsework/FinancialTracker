@@ -1,15 +1,12 @@
 # Financial Tracker - Brandon Morse
 
-## The Financial Tracker is a banking application that allows users to view and add transactions to a .csv file. These transactions can also be viewed separately as deposits and payments. In addition to this, the user can search for transactions based on the vendor name and date ranges!
-
-
-![Class Diagram](path/to/your/class_diagram.png)
+## The Financial Tracker is a banking application that allows users to view and add transactions to a .csv file. These transactions can also be viewed separately as deposits or payments. In addition to this, the user can search for transactions based on the vendor name or date ranges!
 
 ## User Stories
 
 List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 
-- As a customer, I want to be view my deposits and payments so that I can understand what transactions are being made in my name.
+- As a customer, I want to be able to view my deposits and payments so that I can understand what transactions are being made in my name.
 
 - As a customer, I want to be able to run a custom search to find transactions based on the vendor name so that I can quickly find a transaction
 
@@ -55,16 +52,11 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Demo
 
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
-
-![Application Screenshot](path/to/your/screenshot.png)
+![Application Screenshot](FinacialTracker\ApplicationScreenshotDateRanges.png)
 
 ## Future Work
 
-Outline potential future enhancements or functionalities you might consider adding:
-
-- Additional feature to be developed.
-- Improvement of current functionalities.
+- Custom Search to be Implemented Soon!
 
 ## Resources
 
@@ -74,11 +66,8 @@ Outline potential future enhancements or functionalities you might consider addi
 
 - **Brandon Morse** - Application Development (Method, constructor, getters and setters creation)
 
-
 ## Thanks!
 
-Express gratitude towards those who provided help, guidance, or resources:
-
-- Thank you to [Mr. Raymond] for continuous support and guidance!
+- Thank you to Mr. Raymond for continuous support and guidance!
 - A special thanks to all teammates for their dedication and teamwork.
  
