@@ -52,7 +52,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Demo
 
-![Application Screenshot](FinacialTracker\ApplicationScreenshotDateRanges.png)
+![Application Screenshot](ApplicationScreenshotDateRanges.png)
 
 ## Future Work
 
