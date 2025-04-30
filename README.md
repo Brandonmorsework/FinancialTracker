@@ -48,7 +48,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java (Amazon Corretto 17.0.14)
+- IntelliJ (Amazon Corretto 17.0.14)
 
 ## Demo
 
@@ -69,5 +69,3 @@ Follow these steps to get your application running within IntelliJ IDEA:
 ## Thanks!
 
 - Thank you to Mr. Raymond for continuous support and guidance!
-- A special thanks to all teammates for their dedication and teamwork.
- 
