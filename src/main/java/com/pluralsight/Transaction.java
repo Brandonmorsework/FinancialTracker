@@ -64,6 +64,6 @@ public class Transaction {
     public String toString() {
         DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
-       return String.format("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", date.format(DATE_FORMATTER), time.format(TIME_FORMATTER), description,vendor, amount);
+       return String.format("%-12s | %-10s | %-30s | %-20s | $%10.2f\n", date.format(DATE_FORMATTER), time.format(TIME_FORMATTER), description, vendor, amount);
     }
 }

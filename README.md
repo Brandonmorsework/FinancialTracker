@@ -1,8 +1,7 @@
-# Project Title
+# Financial Tracker - Brandon Morse
 
-## Description of the Project
+## The Financial Tracker is a banking application that allows users to view and add transactions to a .csv file. These transactions can also be viewed separately as deposits and payments. In addition to this, the user can search for transactions based on the vendor name and date ranges!
 
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
 
 ![Class Diagram](path/to/your/class_diagram.png)
 
@@ -10,12 +9,30 @@ Briefly describe what this Java console application does. Mention its purpose an
 
 List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 
-- As a user, I want to be able to input my data, so that the application can process it accordingly.
-- As a user, I want to receive immediate feedback, so I can understand what to do next.
+- As a customer, I want to be view my deposits and payments so that I can understand what transactions are being made in my name.
+
+- As a customer, I want to be able to run a custom search to find transactions based on the vendor name so that I can quickly find a transaction
+
+- As a customer I want to filter my transactions by certain date ranges so that I can find both recent and old transactions.
+
+- As a developer, I want to ask the customer to re-enter an invalid date and time input when they are adding payments or deposits so they are not kicked back to the home screen afterward.
+
+- As a developer, I want the application to be formatted neatly so the customer has an easier time of reading displayed information.
 
 ## Setup
 
-Instructions on how to set up and run the project using IntelliJ IDEA.
+1. Create the Financial Tracker class and Transaction class
+2. Create the constructor, getters and setters in the Transaction class
+3. Create a while loop that holds a switch case showing the home screen options for the Financial Tracker
+4. Create a loadTransactions method that reads the .csv file and formats the date and time with a Date Formatter and Time Formatter
+5. Add an addDeposit method and 2 try catches inside their own respective while loops to ask the user for the date and time and ask them again until they input them with the correct format
+6. Create a buffered writer to write any newly added deposits to the .csv file
+7. Repeat step 5 and 6 but for the addPayment method
+8. Create a method that runs a switch case that asks the user what details inside the ledger they want to view
+9. Create a displayDeposits and displayPayments method
+10. Create a reportsMenu that asks the user for a range or search method they would like to see reports for
+11. Create a filterTransactionsByDate method that handles cases 1-4 inside the reportMenu which allows the user to search based on a variety of date ranges
+12. Create a filterTransactionsByVendor method that handles case 5 which allows the user to search for a transaction based on the name they enter
 
 ### Prerequisites
 
@@ -34,8 +51,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Java (Amazon Corretto 17.0.14)
 
 ## Demo
 
@@ -52,20 +68,17 @@ Outline potential future enhancements or functionalities you might consider addi
 
 ## Resources
 
-List resources such as tutorials, articles, or documentation that helped you during the project.
-
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
+- [W3 Schools for Documentation ](https://www.w3schools.com/java/ref_string_format.asp)
 
 ## Team Members
 
-- **Name 1** - Specific contributions or roles.
-- **Name 2** - Specific contributions or roles.
+- **Brandon Morse** - Application Development (Method, constructor, getters and setters creation)
 
-## Thanks
+
+## Thanks!
 
 Express gratitude towards those who provided help, guidance, or resources:
 
-- Thank you to [Mentor's Name] for continuous support and guidance.
+- Thank you to [Mr. Raymond] for continuous support and guidance!
 - A special thanks to all teammates for their dedication and teamwork.
  
