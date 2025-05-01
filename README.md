@@ -51,6 +51,10 @@ Follow these steps to get your Financial Tracker Application running within Inte
 ## Demo
 
 ![Application Screenshot](ApplicationScreenshotDateRanges.png)
+![Application Screenshot_B](ApplicationScreenshot_B.png)
+![Application Screenshot_C](ApplicationScreenshot_C.png)
+![Application Screenshot_D](ApplicationScreenshot_D.png)
+![Application Screenshot E](ApplicationScreenshot_E.png)
 
 ## Future Work
 

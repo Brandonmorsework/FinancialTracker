@@ -388,11 +388,6 @@ public class FinancialTracker {
                     filterTransactionsByVendor(vendorName);
                     break;
 
-                /*case "6":
-                    System.out.println(" ");
-                    System.out.println("Type in the Description, Vendor or Amount");
-                    customSearch(customEntry);*/
-
                 case "0":
                     System.out.println(" ");
                     System.out.println("Returning Home...");
@@ -430,7 +425,6 @@ public class FinancialTracker {
             System.out.println("No Transactions Found Within This Date Range");
             System.out.println(" ");
             System.out.println("Returning Back to Reports Page...");
-            return;
         }
     }
 
@@ -442,28 +436,6 @@ public class FinancialTracker {
 
         for (Transaction transaction : transactions) {
             if (transaction.getVendor().equalsIgnoreCase(vendorName)) {
-                System.out.println(transaction);
-
-                foundName = true;
-
-            }
-        }
-        if (!foundName) {
-            System.out.println("No Transactions Found For This Vendor...");
-            System.out.println(" ");
-            System.out.println("Returning Back to Reports Page...");
-            return;
-        }
-    }
-
-    private static void customSearch(String customEntry) {
-
-        boolean foundName = false;
-        System.out.println("(Transactions from Vendor: " + customEntry + ")");
-        System.out.println(" ");
-
-        for (Transaction transaction : transactions) {
-            if (transaction.getVendor().equalsIgnoreCase(customEntry)) {
                 System.out.println(transaction);
 
                 foundName = true;
