@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FinancialTracker {
+// Initializing the transactions file and date and time formatter as 'final' so they can't be changed later
 
     private static ArrayList<Transaction> transactions = new ArrayList<>();
     private static final String FILE_NAME = "transactions.csv";
@@ -18,9 +19,15 @@ public class FinancialTracker {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     public static void main(String[] args) {
+
+
+//populates the transaction list from the csv file
+
         loadTransactions(FILE_NAME);
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+
+//home screen the user sees immediately
 
         while (running) {
             System.out.println(" ");
@@ -34,6 +41,8 @@ public class FinancialTracker {
             System.out.println("Press 'X' to Exit");
 
             String input = scanner.nextLine().trim();
+
+// this switch case handles user inputs for adding payments, deposits and opening the ledger menu
 
             switch (input.toUpperCase()) {
                 case "D":
@@ -59,9 +68,15 @@ public class FinancialTracker {
         scanner.close();
     }
 
+//
     public static void loadTransactions(String fileName) {
 
+// declares a line variable to hold each line of text read from a file
+
         String line;
+
+// The buffered reader is used to efficiently read information from a file
+// helps the FileReader by reading large chunks of storage and then storing it in memory
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -87,9 +102,10 @@ public class FinancialTracker {
 
     private static void addDeposit(Scanner scanner) {
 
+// = null makes it so parsedDate and time have an empty value until the user inputs something valid (hence the while loop)
+
         LocalDate parsedDate = null;
         LocalTime parsedTime = null;
-        double userDepositInput = 0.0;
 
         while (parsedDate == null) {
             try {
@@ -131,7 +147,7 @@ public class FinancialTracker {
         System.out.println(" ");
         System.out.println("(5 / 5) Finally, Enter the Amount of The Deposit: ");
         System.out.println(" ");
-        userDepositInput = scanner.nextDouble();
+        double userDepositInput = scanner.nextDouble();
         scanner.nextLine();
 
         Transaction transaction = new Transaction(parsedDate, parsedTime, userDescriptionInput, userVendorInput, userDepositInput);
@@ -191,7 +207,7 @@ public class FinancialTracker {
         }
 
         System.out.println(" ");
-        System.out.println("(3 / 5) Please Enter the Description of the Deposit: ");
+        System.out.println("(3 / 5) Please Enter the Description of the Payment: ");
         System.out.println(" ");
         String userDescriptionInput = scanner.nextLine();
 
@@ -200,16 +216,29 @@ public class FinancialTracker {
         System.out.println(" ");
         String userVendorInput = scanner.nextLine();
 
-        System.out.println(" ");
-        System.out.println("(5 / 5) Finally, Enter the Amount of The Payment: ");
-        System.out.println(" ");
-        double userPaymentInput = scanner.nextDouble();
-        scanner.nextLine();
-        if (userPaymentInput < 0) {
-            System.out.println(" ");
-            System.out.println("Please Input a Positive Number For The Payment Amount");
-            System.out.println(" ");
-            return;
+// the user needs to input a positive number which later be turned into a negative, otherwise they will be required to input the amount again
+
+        double userPaymentInput = 0.0;
+
+        while (userPaymentInput <= 0.0) {
+            try {
+                System.out.println(" ");
+                System.out.println("(5 / 5) Finally, Enter the Amount of The Payment: ");
+                System.out.println(" ");
+                userPaymentInput = scanner.nextDouble();
+                scanner.nextLine();
+
+                if (userPaymentInput <= 0.0) {
+                    System.out.println(" ");
+                    System.out.println("Please Input a Positive Number For The Payment Amount!");
+                }
+
+            } catch (Exception e) {
+                System.out.println(" ");
+                System.out.println("Please Input a Valid Number For The Payment Amount!");
+                System.out.println(" ");
+                scanner.nextLine();
+            }
         }
 
         userPaymentInput = userPaymentInput * -1;
@@ -233,7 +262,7 @@ public class FinancialTracker {
         System.out.println(" ");
         System.out.println("Payment Successfully Added!");
         System.out.println(" ");
-        System.out.println(transaction.toString());
+        System.out.println(transaction);
         System.out.println(" ");
 
     }
@@ -287,8 +316,7 @@ public class FinancialTracker {
         System.out.println("Here is Your Current 'All' Ledger");
         for (Transaction transaction : transactions) {
             System.out.println(" ");
-
-            System.out.println(transaction.toString());
+            System.out.println(transaction);
         }
     }
 
@@ -303,7 +331,7 @@ public class FinancialTracker {
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() > 0) {
                 System.out.println(" ");
-                System.out.println(transaction.toString());
+                System.out.println(transaction);
 
                 foundDeposit = true;
             }
@@ -354,6 +382,10 @@ public class FinancialTracker {
 
             String input = scanner.nextLine().trim();
 
+// .withDayOfMonth changes the day of the set month to 1
+// LocalDate.now gets the current date
+//DateTimeExceptions are thrown when the resulting date does not exist (Java handles it!)
+
             switch (input) {
                 case "1":
                 LocalDate endDate = LocalDate.now();
@@ -402,6 +434,7 @@ public class FinancialTracker {
         }
     }
 
+    // iterates over each transaction and gets the date then checks if it falls within the foundInRange boolean.
 
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
 
@@ -409,8 +442,6 @@ public class FinancialTracker {
         System.out.println(" ");
         System.out.println("Transactions Filtered From: (" + startDate + "  to  " + endDate + ")");
         System.out.println(" ");
-
-
 
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = transaction.getDate();
@@ -427,6 +458,9 @@ public class FinancialTracker {
             System.out.println("Returning Back to Reports Page...");
         }
     }
+
+
+    //this method runs through each transaction in the list to see what matches the user's vendor input and will display the appropriate transactions
 
     private static void filterTransactionsByVendor(String vendorName) {
 
@@ -446,7 +480,6 @@ public class FinancialTracker {
             System.out.println("No Transactions Found For This Vendor...");
             System.out.println(" ");
             System.out.println("Returning Back to Reports Page...");
-            return;
         }
     }
 }
